@@ -1,0 +1,1 @@
+-record(feed, {title, xmlUrl, htmlUrl, categories=[]}).

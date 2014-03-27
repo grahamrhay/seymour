@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<opml version="1.0">
+    <head>
+        <title>Example of Feedly OPML</title>
+    </head>
+    <body>
+        <outline text="category1" title="category1">
+            <outline type="rss" text="feed1" title="feed1" xmlUrl="http://feed1.com/rss" htmlUrl="http://feed1.com/home"/>
+            <outline type="rss" text="feed2" title="feed2" xmlUrl="http://feed2.com/rss" htmlUrl="http://feed2.com/home"/>
+        </outline>
+        <outline text="category2" title="category2">
+            <outline type="rss" text="feed1" title="feed1" xmlUrl="http://feed1.com/rss" htmlUrl="http://feed1.com/home"/>
+        </outline>
+        <outline type="rss" text="feed3" title="feed3" xmlUrl="http://feed3.com/rss" htmlUrl="http://feed3.com/home"/>
+    </body>
+</opml>
