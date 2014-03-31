@@ -4,14 +4,24 @@
 -include("../src/seymour.hrl").
 
 opml_parse_test_() ->
-    {foreach, fun read_file/0, [fun test_list_length/1, fun test_feed1/1, fun test_feed2/1, fun test_feed3/1]}.
+    {
+        foreach,
+        fun read_file/0,
+        [
+            fun test_list_length/1,
+            fun test_feed1/1,
+            fun test_feed2/1,
+            fun test_feed3/1,
+            fun test_feed4/1
+        ]
+    }.
 
 read_file() ->
     {ok, Raw} = file:read_file("../test/feedly.opml"),
     opml_parser:parse(Raw).
 
 test_list_length(FeedList) ->
-    [?_assertEqual(3, length(FeedList))].
+    [?_assertEqual(4, length(FeedList))].
 
 test_feed1(FeedList) ->
     Feed1 = lists:nth(1, lists:filter(fun(F) -> F#seymour_feed.title =:= "feed1" end, FeedList)),
@@ -35,4 +45,10 @@ test_feed3(FeedList) ->
         ?_assertEqual("http://feed3.com/home", Feed3#seymour_feed.htmlUrl),
         ?_assertEqual("http://feed3.com/rss", Feed3#seymour_feed.xmlUrl),
         ?_assertEqual([], Feed3#seymour_feed.categories)
+    ].
+
+test_feed4(FeedList) ->
+    Feed = lists:nth(1, lists:filter(fun(F) -> F#seymour_feed.title =:= "feed4" end, FeedList)),
+    [
+        ?_assertEqual("", Feed#seymour_feed.htmlUrl)
     ].

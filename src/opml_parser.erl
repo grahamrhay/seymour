@@ -47,8 +47,14 @@ build_record(Attrs) ->
     }.
 
 get_attribute_value(Attrs, AttrName) ->
-    {attribute, _, _, _, Value} = lists:nth(1, lists:filter(fun(A) -> {attribute, Name, _, _, _} = A, Name =:= AttrName end, Attrs)),
-    Value.
+    MatchingAttrs = lists:filter(fun(A) -> {attribute, Name, _, _, _} = A, Name =:= AttrName end, Attrs),
+    case length(MatchingAttrs) of
+        0 ->
+            "";
+        _ ->
+            {attribute, _, _, _, Value} = lists:nth(1, MatchingAttrs),
+            Value
+    end.
 
 update_list(List, Feed, Category) ->
     {MatchingFeeds, OtherFeeds} = lists:partition(fun(F) -> F#seymour_feed.xmlUrl =:= Feed#seymour_feed.xmlUrl end, List),
