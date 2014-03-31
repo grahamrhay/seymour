@@ -40,7 +40,7 @@ build_record(Attrs) ->
     Title = get_attribute_value(Attrs, "title"),
     HtmlUrl = get_attribute_value(Attrs, "htmlUrl"),
     XmlUrl = get_attribute_value(Attrs, "xmlUrl"),
-    #feed{
+    #seymour_feed{
        title=Title,
        htmlUrl=HtmlUrl,
        xmlUrl=XmlUrl
@@ -51,13 +51,13 @@ get_attribute_value(Attrs, AttrName) ->
     Value.
 
 update_list(List, Feed, Category) ->
-    {MatchingFeeds, OtherFeeds} = lists:partition(fun(F) -> F#feed.xmlUrl =:= Feed#feed.xmlUrl end, List),
+    {MatchingFeeds, OtherFeeds} = lists:partition(fun(F) -> F#seymour_feed.xmlUrl =:= Feed#seymour_feed.xmlUrl end, List),
     case length(MatchingFeeds) of
         0 ->
-            [Feed#feed{categories = update_category_list(Category, Feed#feed.categories)}|List];
+            [Feed#seymour_feed{categories = update_category_list(Category, Feed#seymour_feed.categories)}|List];
         _ ->
             [ExistingFeed] = MatchingFeeds,
-            [ExistingFeed#feed{categories = update_category_list(Category, ExistingFeed#feed.categories)}|OtherFeeds]
+            [ExistingFeed#seymour_feed{categories = update_category_list(Category, ExistingFeed#seymour_feed.categories)}|OtherFeeds]
     end.
 
 update_category_list(NewCategory, Categories) ->

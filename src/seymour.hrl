@@ -1,1 +1,1 @@
--record(feed, {title, xmlUrl, htmlUrl, categories=[]}).
+-record(seymour_feed, {title, xmlUrl, htmlUrl, categories=[]}).
