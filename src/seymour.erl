@@ -4,7 +4,4 @@
 
 parse_file(FilePath) ->
     {ok, Raw} = file:read_file(FilePath),
-    parse(binary_to_list(Raw)).
-
-parse(Opml) ->
-    opml_parser:parse(Opml).
+    opml_parser:parse(Raw).
